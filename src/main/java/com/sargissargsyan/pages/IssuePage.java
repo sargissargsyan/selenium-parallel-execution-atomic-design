@@ -1,7 +1,6 @@
 package com.sargissargsyan.pages;
 
 import com.sargissargsyan.base.BasePage;
-import com.sargissargsyan.models.Issue;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
@@ -18,11 +17,6 @@ public class IssuePage extends BasePage<IssuePage> {
     @FindBy(css = ".user-list-single")
     private WebElement assignee;
 
-    Issue issue;
-    public IssuePage(Issue issue) {
-        this.issue = issue;
-    }
-
     @Override
     public IssuePage open() {
         return openPage();
@@ -35,8 +29,7 @@ public class IssuePage extends BasePage<IssuePage> {
 
     @Override
     public String getUrl() {
-        return "/project/" + issue.getProjectExtraInfo().get("slug")
-                + "/issue/" + issue.getRef() ;
+        return null;
     }
 
     public String getIssueInnerStatus() {
