@@ -1,11 +1,16 @@
 package com.sargissargsyan;
 
 import com.sargissargsyan.api.BaseService;
+import com.sargissargsyan.api.ProjectService;
+import com.sargissargsyan.models.Project;
 import com.sargissargsyan.models.User;
 import com.sargissargsyan.pages.*;
 import com.sargissargsyan.utils.TestUtils;
+import okhttp3.*;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+
+import java.io.IOException;
 
 /**
  * @author Sargis Sargsyan on 5/23/2024
@@ -17,6 +22,7 @@ public class ProjectTest extends SeleniumBase {
     private String email;
     private final String password = "Armenia2024";
     private User newUser;
+    private Project newProject;
 
     @BeforeMethod
     public void setup() {
@@ -32,6 +38,13 @@ public class ProjectTest extends SeleniumBase {
                 .type("public")
                 .build();
         newUser = BaseService.register(newUser);
+        Project project = Project.builder()
+                .name("Test Project X")
+                .description("Test Project X")
+                .creationTemplate(1)
+                .isPrivate(false)
+                .build();
+        newProject = ProjectService.createProject(project);
     }
 
 
@@ -48,5 +61,12 @@ public class ProjectTest extends SeleniumBase {
         ProjectBacklogPage projectBacklogPage = newScrumProjectPage.clickCreateProject();
 
         //do checks
+    }
+
+
+    @Test
+    public void projectPageWithAPI() {
+        login(username, password);
+        new ProjectPage(newProject).open();
     }
 }

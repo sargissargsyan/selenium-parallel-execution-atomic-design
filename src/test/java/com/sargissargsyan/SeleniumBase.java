@@ -14,10 +14,16 @@ import org.testng.annotations.AfterMethod;
 public class SeleniumBase {
 
     public void login(JsonObject userJson) {
+        new LoginPage().open();
+        ((JavascriptExecutor) DriverHelper.get().getDriver())
+                .executeScript("window.localStorage.setItem('token', " + userJson.get("auth_token") +");");
+        ((JavascriptExecutor) DriverHelper.get().getDriver())
+                .executeScript("window.localStorage.setItem('userInfo', '" + userJson +"');");
     }
 
     public void login(String username, String password) {
-
+        JsonObject userJson = BaseService.login(username, password);
+        login(userJson);
     }
 
 
