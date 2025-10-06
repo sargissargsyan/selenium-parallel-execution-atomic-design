@@ -50,4 +50,8 @@ allure serve allure-results
 ```
 
 The framework is created with Taiga.io example. To be able to run this suite you will need to deploy [Taiga.io locally](https://github.com/kaleidos-ventures/taiga-docker).
-Don't forget to set  `PUBLIC_REGISTER_ENABLED: "True"` for `taiga-back` and `taiga-front` services.
+Don't forget to add to &default-back-environment environments
+PUBLIC_REGISTER_ENABLED: "True"
+
+Add to taiga-front service environments
+PUBLIC_REGISTER_ENABLED: "true"
